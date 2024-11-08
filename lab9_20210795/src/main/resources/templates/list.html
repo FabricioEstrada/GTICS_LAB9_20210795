@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELEMEAL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .card-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Max de 3 lineas, par que n ose va desordenado:c */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 70px; /* Ajusta a una altura fija que lo adapte al menor largo que se tiene */
+    }
+</style>
+
+<body>
+
+<div class="container text-center my-5">
+    <h1>TELEMEAL</h1>
+    <form class="form-inline justify-content-center my-4" onsubmit="filterCategories(); return false;">
+        <input id="searchInput" class="form-control mr-2" type="search" placeholder="Search for a meal" aria-label="Search">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+    <div class="row">
+        <div th:each="category : ${listCategories}" class="col-md-4 mb-4">
+            <div class="card">
+                <img th:src="${category.strCategoryThumb}" class="card-img-top" alt="Image of category">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${category.strCategory}">Category Name</h5>
+                    <p class="card-text" th:text="${category.strCategoryDescription}">Category Description</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function filterCategories() {
+        const query = document.getElementById("searchInput").value.toLowerCase();
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach(card => {
+            const categoryName = card.querySelector(".card-title").textContent.toLowerCase();
+            //STARWITH poara que solo busque los que comienzan con lo que ponga el en buscador o sea si coloco C
+            //busca solo C... y ya no busca el toda la palabra, esto se hizo porque al no tener bd, no puedo buscar
+            //por querys
+            if (categoryName.startsWith(query)) {
+                card.parentElement.style.display = "block";
+            } else {
+                card.parentElement.style.display = "none";  // Ocultar las cartas que no cumplen con el requiesito
+            }
+        });
+    }
+</script>
+</body>
+</html>
