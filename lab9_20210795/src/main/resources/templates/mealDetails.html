@@ -25,6 +25,17 @@
             <!-- Imagen centrada con un tamaño de 50% del ancho disponible -->
             <img th:src="${meal.strMealThumb}" class="meal-image img-fluid" alt="Imagen de la comida">
         </div>
+        <form th:action="@{/TeleMeal/favorito}" method="post" class="d-flex justify-content-center">
+            <input type="hidden" name="mealId" th:value="${meal.idMeal}" />
+            <input type="hidden" name="mealName" th:value="${meal.strMeal}" />
+            <input type="hidden" name="mealImage" th:value="${meal.strMealThumb}" />
+            <input type="hidden" name="mealCategory" th:value="${meal.strCategory}" />
+
+            <!-- Botón que cambia cuando se agrega a favoritos -->
+            <button type="submit" id="favoriteBtn" class="btn btn-success"
+                    th:disabled="${favoriteAdded}"
+                    th:text="${favoriteAdded ? 'Favorite!' : 'Add to Favorite'}"></button>
+        </form>
         <div class="col-12 mb-3">
             <h3 th:text="${meal.strMeal}">Nombre de la comida</h3>
             <p><strong>Category:</strong> <span th:text="${meal.strCategory}">Categoría</span></p>

@@ -2,21 +2,26 @@ package org.example.lab9_20210795;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Controller
 @RequestMapping(value = "/TeleMeal")
 public class Controller {
     final MealsDao mealsDao;
     final CategoriesDao categoriesDao;
+    final FavoriteRepository favoriteRepository;
 
-    public Controller(MealsDao mealsDao, CategoriesDao categoriesDao) {
+    public Controller(MealsDao mealsDao, CategoriesDao categoriesDao, FavoriteRepository favoriteRepository) {
         this.mealsDao = mealsDao;
         this.categoriesDao = categoriesDao;
+        this.favoriteRepository = favoriteRepository;
     }
     @GetMapping("/list")
     public String listarMealsCategoria(@RequestParam(name = "search", required = false) String search, Model model) {
@@ -34,9 +39,36 @@ public class Controller {
     }
     @GetMapping("/details")
     public String getMealDetails(@RequestParam("id") String id, Model model) {
-        // Obtén los detalles de la comida desde el DAO o servicio usando el ID
-        Meals meal = mealsDao.detallesID(id); // Aquí asumo que mealsDao tiene un método findById
-        model.addAttribute("meal", meal); // Pasa los detalles de la comida a la vista
-        return "mealDetails"; // Devuelve la vista con los detalles de la comida
+        Meals meal = mealsDao.detallesID(id);
+        model.addAttribute("meal", meal);
+
+        // Verificando si esta en favoritos
+        Optional<Favorite> favorite = favoriteRepository.findByIdMeal(id);
+
+        // Si existe, agregamos el atributo "favoriteAdded" al modelo
+        if (favorite.isPresent()) {
+            model.addAttribute("favoriteAdded", true);
+        } else {
+            model.addAttribute("favoriteAdded", false);
+        }
+        return "mealDetails";
+    }
+
+    // Método para agregar receta a favoritos
+    @PostMapping("/favorito")
+    public String addFavorite(@RequestParam("mealId") String mealId,
+                              @RequestParam("mealName") String mealName,
+                              @RequestParam("mealImage") String mealImage,
+                              @RequestParam("mealCategory") String mealCategory,
+                              Model model) {
+
+        Favorite favorite = new Favorite();
+        favorite.setIdMeal(mealId);
+        favorite.setStrMeal(mealName);
+        favorite.setStrMealThumb(mealImage);
+        favorite.setStrCategory(mealCategory);
+
+        favoriteRepository.save(favorite);
+        return "redirect:/TeleMeal/details?id=" + mealId;
     }
 }

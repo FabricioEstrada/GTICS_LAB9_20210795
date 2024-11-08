@@ -36,6 +36,9 @@
 
 <div class="container text-center my-5">
     <h1>TELEMEAL</h1>
+    <div th:if="${message != null}" class="alert alert-success">
+        <span th:text="${message}"></span>
+    </div>
     <form class="my-4" th:action="@{/TeleMeal/list}" method="get">
         <div class="input-group w-100">
             <input type="text" class="form-control" name="search" placeholder="Find some food">
