@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de la Comida</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .meal-image {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 15px; /* Margen superior */
+            margin-bottom: 15px; /* Margen inferior */
+            width: 35%; /* Establece el tamaño deseado */
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2 class="text-center mb-3">Detalles de la Comida</h2>
+    <div class="row card mb-3">
+        <div class="col-12 text-center">
+            <!-- Imagen centrada con un tamaño de 50% del ancho disponible -->
+            <img th:src="${meal.strMealThumb}" class="meal-image img-fluid" alt="Imagen de la comida">
+        </div>
+        <div class="col-12 mb-3">
+            <h3 th:text="${meal.strMeal}">Nombre de la comida</h3>
+            <p><strong>Category:</strong> <span th:text="${meal.strCategory}">Categoría</span></p>
+            <p><strong>Area:</strong> <span th:text="${meal.strArea}">Área</span></p>
+            <p><strong>Tags:</strong> <span th:text="${meal.strTags}">Área</span></p>
+            <p><strong>Instrucciones:</strong> <span th:text="${meal.strInstructions}">Instrucciones</span></p>
+
+            <h4>Ingredientes</h4>
+            <div>
+                <p>
+                    <span th:text="${meal.strMeasure1}"></span>
+                    <span th:text="${meal.strIngredient1}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure2}"></span>
+                    <span th:text="${meal.strIngredient2}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure3}"></span>
+                    <span th:text="${meal.strIngredient3}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure4}"></span>
+                    <span th:text="${meal.strIngredient4}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure5}"></span>
+                    <span th:text="${meal.strIngredient5}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure6}"></span>
+                    <span th:text="${meal.strIngredient6}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure7}"></span>
+                    <span th:text="${meal.strIngredient7}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure8}"></span>
+                    <span th:text="${meal.strIngredient8}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure9}"></span>
+                    <span th:text="${meal.strIngredient9}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure10}"></span>
+                    <span th:text="${meal.strIngredient10}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure11}"></span>
+                    <span th:text="${meal.strIngredient11}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure12}"></span>
+                    <span th:text="${meal.strIngredient12}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure13}"></span>
+                    <span th:text="${meal.strIngredient13}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure14}"></span>
+                    <span th:text="${meal.strIngredient14}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure15}"></span>
+                    <span th:text="${meal.strIngredient15}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure16}"></span>
+                    <span th:text="${meal.strIngredient16}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure17}"></span>
+                    <span th:text="${meal.strIngredient17}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure18}"></span>
+                    <span th:text="${meal.strIngredient18}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure19}"></span>
+                    <span th:text="${meal.strIngredient19}"></span>
+                </p>
+                <p>
+                    <span th:text="${meal.strMeasure20}"></span>
+                    <span th:text="${meal.strIngredient20}"></span>
+                </p>
+            </div>
+
+
+            <a th:href="${meal.strYoutube}" class="btn btn-primary" target="_blank">Ver receta en YouTube</a>
+            <a href="http://localhost:8080/TeleMeal/list" class="btn btn-secondary">Volver a ver categorías</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
