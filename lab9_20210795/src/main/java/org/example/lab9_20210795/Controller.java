@@ -35,17 +35,15 @@ public class Controller {
             List<Categories> listaCategories = categoriesDao.listar();
             model.addAttribute("listaCategories", listaCategories);  // Pasa la lista de comidas a la vista
         }
-        return "list";  // Devuelve la vista listMeals
+        return "list";
     }
     @GetMapping("/details")
     public String getMealDetails(@RequestParam("id") String id, Model model) {
         Meals meal = mealsDao.detallesID(id);
         model.addAttribute("meal", meal);
 
-        // Verificando si esta en favoritos
         Optional<Favorite> favorite = favoriteRepository.findByIdMeal(id);
 
-        // Si existe, agregamos el atributo "favoriteAdded" al modelo
         if (favorite.isPresent()) {
             model.addAttribute("favoriteAdded", true);
         } else {
@@ -54,7 +52,6 @@ public class Controller {
         return "mealDetails";
     }
 
-    // Método para agregar receta a favoritos
     @PostMapping("/favorito")
     public String addFavorite(@RequestParam("mealId") String mealId,
                               @RequestParam("mealName") String mealName,
@@ -70,5 +67,13 @@ public class Controller {
 
         favoriteRepository.save(favorite);
         return "redirect:/TeleMeal/details?id=" + mealId;
+    }
+    @GetMapping("/listMyFavorites")
+    public String listarFavoritos(Model model) {
+
+        // Si no hay busqeudas, muestro como antes todas las categorias
+        List<Favorite> listaFavoritos = favoriteRepository.findAll();
+        model.addAttribute("listaFavoritos", listaFavoritos);  // Pasa la lista de comidas a la vista
+        return "listFavorite";
     }
 }

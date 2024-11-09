@@ -22,6 +22,14 @@
         text-overflow: ellipsis;
         height: 70px; /* Ajusta a una altura fija que lo adapte al menor largo que se tiene */
     }
+    .card-title{
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* Max de 1 lineas, par que n ose va desordenado:c */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: black; /* Cambiar a color negro, para que no cambei a azul */
+    }
     .card-text-2 {
         display: -webkit-box;
         -webkit-line-clamp: 3; /* Max de 3 lineas, par que n ose va desordenado:c */
@@ -36,17 +44,20 @@
 
 <div class="container text-center my-5">
     <h1>TELEMEAL</h1>
-    <div th:if="${message != null}" class="alert alert-success">
-        <span th:text="${message}"></span>
+    <div class="d-flex justify-content-end">
+        <form th:action="@{/TeleMeal/listMyFavorites}" method="get">
+            <button type="submit" class="btn btn-success">List My Favorites</button>
+        </form>
     </div>
-    <form class="my-4" th:action="@{/TeleMeal/list}" method="get">
-        <div class="input-group w-100">
-            <input type="text" class="form-control" name="search" placeholder="Find some food">
-            <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-    </form>
+    <div>
+        <form class="mt-2 mb-4" th:action="@{/TeleMeal/list}" method="get">
+            <div class="input-group w-100">
+                <input type="text" class="form-control" name="search" placeholder="Find some food">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
     <div class="row">
-        <!-- Mostrar categorías si no hay búsqueda -->
         <div th:if="${listaCategories != null}" th:each="category : ${listaCategories}" class="col-md-4 mb-4">
             <div class="card">
                 <img th:src="${category.strCategoryThumb}" class="card-img-top" alt="Image of category">
@@ -57,7 +68,6 @@
             </div>
         </div>
 
-        <!-- Mostrar comidas si hay resultados de búsqueda -->
         <div th:if="${listaMeals != null}" th:each="meal : ${listaMeals}" class="col-md-4 mb-4">
             <div class="card">
                 <!-- Pasar el ID como parámetro de consulta -->
@@ -70,6 +80,9 @@
                 </a>
             </div>
         </div>
+    </div>
+    <div th:if="${listaMeals != null}">
+        <a href="http://localhost:8080/TeleMeal/list" class="btn btn-info">Volver a ver categorías</a>
     </div>
 </div>
 

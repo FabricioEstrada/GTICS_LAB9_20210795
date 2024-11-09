@@ -32,7 +32,7 @@ public class MealsDao {
     public Meals detallesID(String ID) {
         RestTemplate restTemplate = new RestTemplate();
 
-        // este link se ha usado de la propia IP
+        // este link se ha usado de la propia API
         String endPoint = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + ID;
 
         ResponseEntity<MealsResponse> responseEntity = restTemplate.getForEntity(endPoint, MealsResponse.class);
