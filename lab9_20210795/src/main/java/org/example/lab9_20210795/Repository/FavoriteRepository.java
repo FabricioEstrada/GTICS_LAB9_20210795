@@ -1,5 +1,6 @@
-package org.example.lab9_20210795;
+package org.example.lab9_20210795.Repository;
 
+import org.example.lab9_20210795.Entity.Favorite;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

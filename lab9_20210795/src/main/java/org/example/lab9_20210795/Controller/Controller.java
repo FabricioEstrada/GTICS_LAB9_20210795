@@ -1,5 +1,11 @@
-package org.example.lab9_20210795;
+package org.example.lab9_20210795.Controller;
 
+import org.example.lab9_20210795.Dao.CategoriesDao;
+import org.example.lab9_20210795.Dao.MealsDao;
+import org.example.lab9_20210795.Entity.Categories;
+import org.example.lab9_20210795.Entity.Favorite;
+import org.example.lab9_20210795.Entity.Meals;
+import org.example.lab9_20210795.Repository.FavoriteRepository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

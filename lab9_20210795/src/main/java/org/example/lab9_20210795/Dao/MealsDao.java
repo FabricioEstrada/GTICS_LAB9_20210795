@@ -1,12 +1,12 @@
-package org.example.lab9_20210795;
+package org.example.lab9_20210795.Dao;
 
+import org.example.lab9_20210795.Entity.Meals;
+import org.example.lab9_20210795.ResponseJson.MealsResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 @Component
 public class MealsDao {

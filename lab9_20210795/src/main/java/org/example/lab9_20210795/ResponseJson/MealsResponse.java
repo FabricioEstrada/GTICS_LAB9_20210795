@@ -1,7 +1,8 @@
-package org.example.lab9_20210795;
+package org.example.lab9_20210795.ResponseJson;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.lab9_20210795.Entity.Meals;
 
 import java.util.List;
 
