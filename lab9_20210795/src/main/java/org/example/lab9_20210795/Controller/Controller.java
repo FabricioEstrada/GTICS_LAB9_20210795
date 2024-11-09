@@ -28,7 +28,7 @@ public class Controller {
         this.categoriesDao = categoriesDao;
         this.favoriteRepository = favoriteRepository;
     }
-    @GetMapping("/list")
+    @GetMapping({"/list", "/", ""})
     public String listarMealsCategoria(@RequestParam(name = "search", required = false) String search, Model model) {
 
         if (search != null && !search.isEmpty()) {
