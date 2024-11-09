@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TELEMEAL</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .card a {
+        text-decoration: none; /* Elimina el subrayado */
+    }
+
+    .card-title{
+        display: -webkit-box;
+        -webkit-line-clamp: 1; /* Max de 1 lineas, par que n ose va desordenado:c */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: black; /* Cambiar a color negro, para que no cambei a azul */
+    }
+    .card-text {
+        display: -webkit-box;
+        -webkit-line-clamp: 3; /* Max de 3 lineas, par que n ose va desordenado:c */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: black; /* Cambiar a color negro, para que no cambei a azul */
+        height: 20px; /* Ajusta a una altura fija que lo adapte al menor largo que se tiene */
+    }
+
+</style>
+
+<body>
+
+<div class="container text-center my-5">
+    <h1>TELEMEAL</h1>
+    <h1 class="d-flex justify-content-start mb-4">My Favorite Meals</h1>
+    <div class="row">
+        <div th:if="${listaFavoritos != null}" th:each="favoritos : ${listaFavoritos}" class="col-md-4 mb-4">
+            <div class="card">
+                <a th:href="@{/TeleMeal/details(id=${favoritos.idMeal})}">
+                    <img th:src="${favoritos.getStrMealThumb()}" class="card-img-top" alt="Image of category">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${favoritos.getStrMeal()}">Meal Name</h5>
+                        <p class="card-text" th:text="${favoritos.getStrCategory()}">Category</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <a href="http://localhost:8080/TeleMeal/list" class="btn btn-info">Volver a ver categorías</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
